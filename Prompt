@@ -1,0 +1,753 @@
+```text
+# Cursor AI Master Prompt
+## Project: "Food Hack" (ဘာချက်စားမလဲ)
+### AI Agent Hackathon Project
+
+You are a senior full-stack software engineer, AI engineer, and UI/UX designer.
+
+Your goal is to build a COMPLETE, DEMO-READY web application for an Agentic AI Hackathon. Write production-quality, modular, well-commented code.
+
+The project must look polished enough to demonstrate within a hackathon.
+
+==================================================
+PROJECT IDEA
+==================================================
+
+Project Name:
+Food Hack (ဘာချက်စားမလဲ)
+
+Tagline:
+Turn whatever is left in your kitchen into a delicious Myanmar meal.
+
+Problem
+
+Many students, hostel residents, and young workers in Myanmar struggle with rising food prices.
+
+Every day they ask:
+
+"I only have onion, potato and garlic. What can I cook?"
+
+Instead of buying extra ingredients or wasting food, the application recommends traditional Myanmar dishes using only the ingredients the user already has.
+
+The application should feel useful enough that someone would genuinely use it every day.
+
+==================================================
+MAIN GOAL
+==================================================
+
+Generate multiple Myanmar recipes from available ingredients.
+
+The recipes should
+
+- use only available ingredients
+- prioritize low cost
+- reduce food waste
+- be easy to understand
+- be written in casual Burmese
+- optionally include English names
+
+==================================================
+TECH STACK
+==================================================
+
+Frontend
+
+- React
+- Vite
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- React Router
+- React Query
+
+Backend
+
+- Node.js
+- Express.js
+
+Database
+
+- PostgreSQL
+- Prisma ORM
+
+Authentication
+
+- Clerk OR Firebase Auth
+
+Storage
+
+- Cloudinary (optional)
+
+AI
+
+- OpenAI API
+- Gemini API (support easy switching)
+
+Maps
+
+Optional if needed
+
+==================================================
+IMPORTANT
+
+THIS IS AN AGENTIC AI HACKATHON.
+
+The AI should NOT simply answer prompts.
+
+It should reason,
+plan,
+make decisions,
+choose actions,
+and call tools autonomously.
+
+==================================================
+AI AGENT ARCHITECTURE
+==================================================
+
+Create a separate AI Agent service.
+
+Suggested frameworks
+
+- LangGraph
+- LangChain
+- OpenAI Agents SDK
+- Vercel AI SDK
+
+The AI Agent should use tools.
+
+Example tools:
+
+Recipe Generator Tool
+
+Ingredient Checker Tool
+
+Nutrition Calculator Tool
+
+Leftover Recipe Tool
+
+YouTube Search Tool
+
+Shopping Recommendation Tool
+
+Meal Planner Tool
+
+Budget Calculator Tool
+
+Internet Search Tool
+
+==================================================
+AI DECISION MAKING
+==================================================
+
+YES.
+
+The AI should make decisions.
+
+Example reasoning:
+
+User has
+
+- onion
+- egg
+- tomato
+
+Agent thinks
+
+"I found 12 possible dishes."
+
+"I should rank them by"
+
+- ingredient match
+- nutrition
+- cooking difficulty
+- preparation time
+- popularity
+- cost
+
+Then chooses the top three.
+
+The AI should also decide
+
+If protein is too low
+
+Recommend another recipe.
+
+If ingredients are too few
+
+Suggest what cheap ingredient to buy.
+
+If user has leftovers
+
+Generate a completely different meal.
+
+==================================================
+MULTI STEP AGENT WORKFLOW
+==================================================
+
+Example
+
+Receive ingredients
+
+↓
+
+Check database
+
+↓
+
+Search recipes
+
+↓
+
+If insufficient
+
+Call LLM
+
+↓
+
+Estimate nutrition
+
+↓
+
+Search YouTube
+
+↓
+
+Generate final answer
+
+↓
+
+Return response
+
+==================================================
+FOLDER STRUCTURE
+==================================================
+
+Create separate folders.
+
+food-hack/
+
+frontend/
+
+backend/
+
+database/
+
+ai-agent/
+
+genai/
+
+shared/
+
+docs/
+
+README.md
+
+==================================================
+FRONTEND
+==================================================
+
+Modern responsive UI.
+
+Support desktop and mobile.
+
+Pages
+
+Home
+
+Recipe Results
+
+Recipe Details
+
+Meal History
+
+Saved Recipes
+
+Nutrition Dashboard
+
+Settings
+
+==================================================
+HOME PAGE
+==================================================
+
+Beautiful hero section
+
+Search ingredients
+
+Ingredient selector
+
+Categories
+
+Vegetables
+
+Meat
+
+Fish
+
+Eggs
+
+Spices
+
+Oils
+
+Rice
+
+Beans
+
+Noodles
+
+More than 100 ingredients.
+
+Search bar.
+
+Checkbox interface.
+
+Ingredient chips.
+
+Images.
+
+Myanmar names.
+
+English names.
+
+Example
+
+ကြက်ဥ
+Egg
+
+ကြက်သား
+Chicken
+
+အာလူး
+Potato
+
+ကြက်သွန်နီ
+Onion
+
+ဆီ
+Oil
+
+ငံပြာရည်
+Soy Sauce
+
+ငရုတ်သီး
+Chili
+
+etc.
+
+==================================================
+RECIPE RESULT
+==================================================
+
+Generate
+
+Minimum 10 dishes
+
+Sort by
+
+Best Match
+
+Fastest
+
+Cheapest
+
+Healthiest
+
+Most Popular
+
+Each card includes
+
+Image
+
+Recipe Name
+
+Difficulty
+
+Cooking Time
+
+Nutrition Score
+
+Calories
+
+Ingredients Used
+
+==================================================
+RECIPE DETAILS
+==================================================
+
+Show
+
+Large photo
+
+Myanmar name
+
+English name
+
+Cooking steps
+
+Preparation time
+
+Cooking time
+
+Difficulty
+
+Budget
+
+Nutrition facts
+
+Calories
+
+Protein
+
+Fat
+
+Carbs
+
+Fiber
+
+Vitamin highlights
+
+==================================================
+LEFTOVER RECIPE CREATOR
+==================================================
+
+Feature
+
+User enters leftovers
+
+Example
+
+Half rice
+
+One egg
+
+Small onion
+
+AI creates
+
+New recipes
+
+instead of repeating yesterday's meal.
+
+==================================================
+NUTRITION TRACKER
+==================================================
+
+Track
+
+Calories
+
+Protein
+
+Fat
+
+Carbs
+
+Water intake
+
+Nutrition score
+
+Daily summary
+
+==================================================
+NUTRIENT LIST
+==================================================
+
+Every recipe should include
+
+Calories
+
+Protein
+
+Fat
+
+Carbs
+
+Fiber
+
+Iron
+
+Calcium
+
+Vitamin A
+
+Vitamin C
+
+==================================================
+YOUTUBE HELP
+==================================================
+
+Every recipe should include
+
+Watch Tutorial
+
+Display
+
+3 YouTube videos
+
+using YouTube Search API.
+
+==================================================
+DIFFICULTY
+==================================================
+
+Every recipe has
+
+Very Easy
+
+Easy
+
+Medium
+
+Hard
+
+Expert
+
+Also display
+
+Estimated cooking skill.
+
+==================================================
+MORE DISHES
+==================================================
+
+Include lots of Myanmar dishes.
+
+Examples
+
+Tomato Egg
+
+Potato Curry
+
+Bean Curry
+
+Chicken Curry
+
+Fish Curry
+
+Fried Rice
+
+Mohinga
+
+Shan Noodles
+
+Rice Salad
+
+Pumpkin Curry
+
+Roselle Soup
+
+Bamboo Shoot Curry
+
+Tofu Salad
+
+Egg Curry
+
+Many more.
+
+==================================================
+BACKEND
+==================================================
+
+REST API
+
+Organize
+
+Controllers
+
+Routes
+
+Services
+
+Repositories
+
+Middleware
+
+Validation
+
+Error handling
+
+Logging
+
+==================================================
+DATABASE
+==================================================
+
+Tables
+
+Users
+
+Ingredients
+
+Recipes
+
+RecipeIngredients
+
+Nutrition
+
+SavedRecipes
+
+MealHistory
+
+SearchHistory
+
+==================================================
+GEN AI
+==================================================
+
+Separate folder.
+
+Prompt templates.
+
+Prompt engineering.
+
+LLM wrapper.
+
+Retry logic.
+
+Structured JSON output.
+
+==================================================
+AI PROMPT
+==================================================
+
+Generate recipes in JSON.
+
+Return
+
+Recipe name
+
+Description
+
+Cooking steps
+
+Nutrition
+
+Difficulty
+
+Prep time
+
+Cook time
+
+Budget
+
+Ingredient list
+
+==================================================
+BONUS AI FEATURES
+==================================================
+
+Meal Planner
+
+Generate 7-day meal plans.
+
+Budget Optimizer
+
+Stay under daily budget.
+
+Healthy Swap
+
+Replace unhealthy ingredients.
+
+Ingredient Completer
+
+Missing only one ingredient?
+
+Recommend cheapest replacement.
+
+Voice Input
+
+Speak ingredients.
+
+Smart Pantry
+
+Remember ingredients.
+
+Expiry Reminder
+
+Warn users.
+
+Festival Recipes
+
+Recommend recipes for Thingyan, Thadingyut, etc.
+
+==================================================
+HACKATHON WOW FEATURES
+==================================================
+
+AI explains WHY it selected each recipe.
+
+Confidence score.
+
+Food waste score.
+
+Budget saved.
+
+Nutrition comparison.
+
+Recipe similarity.
+
+Smart recommendations.
+
+==================================================
+UI STYLE
+==================================================
+
+Warm colors
+
+Orange
+
+Yellow
+
+Green
+
+Rounded cards
+
+Beautiful animations
+
+Glassmorphism where appropriate
+
+Modern typography
+
+Smooth loading animations
+
+Skeleton loading
+
+Dark mode
+
+==================================================
+README
+==================================================
+
+Generate
+
+Installation guide
+
+Folder explanation
+
+Architecture diagram
+
+API documentation
+
+AI Agent workflow
+
+Environment variables
+
+Deployment guide
+
+==================================================
+FINAL REQUIREMENT
+==================================================
+
+Generate ALL code.
+
+Generate every folder.
+
+Generate reusable components.
+
+Use best coding practices.
+
+Make the project clean, scalable, modular, and hackathon-ready.
+
+The finished application should demonstrate an autonomous AI agent that reasons through recipe selection, invokes tools, makes decisions, and provides users with practical cooking recommendations rather than functioning as a simple chatbot.
+```
