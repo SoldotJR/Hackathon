@@ -7,11 +7,9 @@ import type {
   NotificationCategory,
   NotificationKind,
 } from "@/types/notifications";
-import { ToastSuccess } from "@/components/notifications/ToastSuccess";
-import { ToastError } from "@/components/notifications/ToastError";
-import { ToastInfo } from "@/components/notifications/ToastInfo";
+import { SimpleToast } from "@/components/notifications/ToastSuccess";
 
-const DURATION = 4500;
+const DURATION = 4000;
 
 type PushInput = {
   title: string;
@@ -41,53 +39,13 @@ function showToast(
   }
 ) {
   const duration = opts?.duration ?? DURATION;
-  const timestamp = new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  if (kind === "error") {
-    return toast.custom(
-      (id) => (
-        <ToastError
-          title={title}
-          message={message}
-          timestamp={timestamp}
-          onClose={() => toast.dismiss(id)}
-          actionLabel={opts?.actionLabel}
-          onAction={opts?.onAction}
-        />
-      ),
-      { duration }
-    );
-  }
-
-  if (kind === "success") {
-    return toast.custom(
-      (id) => (
-        <ToastSuccess
-          title={title}
-          message={message}
-          timestamp={timestamp}
-          candidateName={opts?.candidateName}
-          onClose={() => toast.dismiss(id)}
-          actionLabel={opts?.actionLabel}
-          onAction={opts?.onAction}
-          secondaryLabel={opts?.secondaryLabel}
-          onSecondary={opts?.onSecondary}
-        />
-      ),
-      { duration }
-    );
-  }
 
   return toast.custom(
     (id) => (
-      <ToastInfo
-        kind={kind === "warning" ? "warning" : "info"}
+      <SimpleToast
+        kind={kind}
         title={title}
         message={message}
-        timestamp={timestamp}
         onClose={() => toast.dismiss(id)}
         actionLabel={opts?.actionLabel}
         onAction={opts?.onAction}
@@ -275,19 +233,11 @@ export const notify = {
       ],
     });
     return showToast("success", title, message, {
-      candidateName,
       actionLabel: "View Email",
       onAction: () => {
         window.location.href = "/dashboard/recruitment?tab=offer";
       },
-      secondaryLabel: "Undo",
-      onSecondary: () => {
-        notify.info("Offer send undone", `Offer to ${candidateName} marked as draft.`, {
-          category: "emails",
-          skipCenter: false,
-        });
-      },
-      duration: 6000,
+      duration: 5000,
     });
   },
 

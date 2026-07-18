@@ -5,12 +5,11 @@ import { Toaster } from "sonner";
 export function ToastProvider() {
   return (
     <Toaster
-      position="top-right"
-      expand
-      visibleToasts={4}
-      gap={10}
-      offset={16}
-      duration={4500}
+      position="top-center"
+      visibleToasts={3}
+      gap={8}
+      offset={20}
+      duration={4000}
       toastOptions={{
         unstyled: true,
         classNames: {
