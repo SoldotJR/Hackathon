@@ -7,46 +7,24 @@ import type { ComponentType } from "react";
 import {
   LayoutDashboard,
   Users,
-  Bot,
-  Calendar,
-  FileBarChart,
-  BarChart3,
   Settings,
   Sparkles,
   Briefcase,
   X,
   ChevronLeft,
-  Mail,
-  CalendarClock,
-  ClipboardCheck,
-  UserRoundSearch,
-  FileSignature,
-  History,
+  Zap,
+  LineChart,
 } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useUIStore } from "@/store/ui-store";
 import { Button } from "@/components/ui/button";
 
-const NAV_CORE = [
+const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/recruitment", label: "Recruitment", icon: Briefcase },
   { href: "/dashboard/candidates", label: "Candidates", icon: Users },
-  { href: "/dashboard/workflow", label: "AI Workflow", icon: Bot },
-  { href: "/dashboard/reports", label: "Reports", icon: FileBarChart },
-  { href: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
-];
-
-const NAV_AUTOMATION = [
-  { href: "/dashboard/communication", label: "Candidate Communication", icon: Mail },
-  { href: "/dashboard/scheduling", label: "Interview Scheduling", icon: CalendarClock },
-  { href: "/dashboard/evaluation", label: "Interview Evaluation", icon: ClipboardCheck },
-  { href: "/dashboard/follow-up", label: "Follow-up Center", icon: UserRoundSearch },
-  { href: "/dashboard/offers", label: "Offer Management", icon: FileSignature },
-  { href: "/dashboard/activity", label: "Activity Timeline", icon: History },
-];
-
-const NAV_FOOTER = [
-  { href: "/dashboard/reminders", label: "Interview Reminders", icon: Calendar },
+  { href: "/dashboard/automation", label: "Automation Center", icon: Zap },
+  { href: "/dashboard/reports", label: "Reports & Analytics", icon: LineChart },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
@@ -95,32 +73,8 @@ function NavLink({
 
 function NavItems({ collapsed }: { collapsed: boolean }) {
   return (
-    <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 pb-3">
-      {NAV_CORE.map((item) => (
-        <NavLink key={item.href} {...item} collapsed={collapsed} />
-      ))}
-
-      {!collapsed ? (
-        <p className="mb-1 mt-4 px-3 text-[10px] font-semibold uppercase tracking-wider text-subtext/70">
-          Automation
-        </p>
-      ) : (
-        <div className="my-2 border-t border-white/10" />
-      )}
-
-      {NAV_AUTOMATION.map((item) => (
-        <NavLink key={item.href} {...item} collapsed={collapsed} />
-      ))}
-
-      {!collapsed ? (
-        <p className="mb-1 mt-4 px-3 text-[10px] font-semibold uppercase tracking-wider text-subtext/70">
-          More
-        </p>
-      ) : (
-        <div className="my-2 border-t border-white/10" />
-      )}
-
-      {NAV_FOOTER.map((item) => (
+    <nav className="flex flex-1 flex-col gap-1 px-3 pb-3">
+      {NAV.map((item) => (
         <NavLink key={item.href} {...item} collapsed={collapsed} />
       ))}
     </nav>
@@ -136,7 +90,7 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-white/10 bg-card/80 backdrop-blur-xl transition-all duration-300 lg:flex",
-          sidebarCollapsed ? "w-[80px]" : "w-[270px]"
+          sidebarCollapsed ? "w-[80px]" : "w-[260px]"
         )}
       >
         <div className="flex h-16 shrink-0 items-center justify-between px-4">
@@ -166,8 +120,8 @@ export function Sidebar() {
         <div className="shrink-0 p-4">
           {!sidebarCollapsed && (
             <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-xs text-subtext">
-              <p className="font-medium text-white">Autonomous Mode</p>
-              <p className="mt-1">AI handles outreach — you decide who to hire</p>
+              <p className="font-medium text-white">6 hubs · all features</p>
+              <p className="mt-1">Related tools live in tabs — less switching</p>
             </div>
           )}
         </div>
@@ -184,7 +138,7 @@ export function Sidebar() {
               onClick={() => setSidebarOpen(false)}
             />
             <motion.aside
-              className="fixed inset-y-0 left-0 z-50 flex w-[290px] flex-col border-r border-white/10 bg-card lg:hidden"
+              className="fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col border-r border-white/10 bg-card lg:hidden"
               initial={{ x: -300 }}
               animate={{ x: 0 }}
               exit={{ x: -300 }}
@@ -203,10 +157,7 @@ export function Sidebar() {
                   <X className="h-5 w-5" />
                 </Button>
               </div>
-              <div
-                className="flex-1 overflow-y-auto"
-                onClick={() => setSidebarOpen(false)}
-              >
+              <div className="flex-1 overflow-y-auto" onClick={() => setSidebarOpen(false)}>
                 <NavItems collapsed={false} />
               </div>
             </motion.aside>

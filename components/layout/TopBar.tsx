@@ -1,10 +1,10 @@
 "use client";
 
-import { Menu, Search, Sun, Moon } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useUIStore } from "@/store/ui-store";
 import { NotificationCenter } from "@/features/notifications/NotificationCenter";
+import { GlobalSearch } from "@/features/search/GlobalSearch";
 import { cn } from "@/utils/cn";
 
 export function TopBar({ title }: { title?: string }) {
@@ -32,14 +32,7 @@ export function TopBar({ title }: { title?: string }) {
         </h1>
       )}
 
-      <div className="relative ml-auto hidden max-w-xs flex-1 md:block">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-subtext" />
-        <Input
-          placeholder="Search candidates, plans…"
-          className="h-10 pl-9"
-          aria-label="Search"
-        />
-      </div>
+      <GlobalSearch className="ml-auto hidden max-w-sm flex-1 md:block" />
 
       <Button
         variant="ghost"

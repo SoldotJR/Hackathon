@@ -22,7 +22,7 @@ export function DashboardShell({
       <div
         className={cn(
           "transition-all duration-300",
-          sidebarCollapsed ? "lg:pl-[80px]" : "lg:pl-[270px]"
+          sidebarCollapsed ? "lg:pl-[80px]" : "lg:pl-[260px]"
         )}
       >
         <TopBar title={title} />
