@@ -16,16 +16,16 @@ export function SkillRadar({ skills }: Props) {
     <div className="skill-radar" aria-label="Skill radar chart">
       <ResponsiveContainer width="100%" height={240}>
         <RadarChart data={skills} cx="50%" cy="50%" outerRadius="70%">
-          <PolarGrid stroke="rgba(11, 61, 58, 0.18)" />
+          <PolarGrid stroke="rgba(15, 118, 110, 0.18)" />
           <PolarAngleAxis
             dataKey="skill"
-            tick={{ fill: '#3d5a56', fontSize: 11, fontFamily: 'Plus Jakarta Sans, sans-serif' }}
+            tick={{ fill: '#64748b', fontSize: 11, fontFamily: 'Plus Jakarta Sans, sans-serif' }}
           />
           <Radar
             name="Skills"
             dataKey="score"
-            stroke="#0B3D3A"
-            fill="#0B3D3A"
+            stroke="#0f766e"
+            fill="#0f766e"
             fillOpacity={0.28}
           />
         </RadarChart>

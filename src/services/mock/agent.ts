@@ -35,7 +35,7 @@ export const mockConversation: AgentMessage[] = [
   {
     id: 'm1',
     role: 'agent',
-    text: 'Meridian online. I can scout talent, screen resumes, handle HR helpdesk, and keep hiring ops moving overnight.',
+    text: 'TalentPilot Master Agent online. I orchestrate Communication, Reminder, Follow-up, Scheduling, Evaluation, and Offer agents.',
     at: '08:01',
   },
   {

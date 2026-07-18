@@ -1,6 +1,7 @@
 export const brand = {
-  name: 'Meridian',
-  tagline: '24/7 AI HR Recruiter & Operations',
+  name: 'TalentPilot AI',
+  shortName: 'TalentPilot',
+  tagline: 'Agentic AI HR Recruitment Manager',
   pitch:
-    'Talent scouting, screening, helpdesk, and hiring ops — always on, always ranked.',
+    'Scout, screen, schedule, and close — with autonomous agents working alongside your team.',
 }

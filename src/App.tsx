@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Bot, LoaderCircle } from 'lucide-react'
+import { Bot, LoaderCircle, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { SiteNav } from './components/SiteNav'
+import { useEffect, useState } from 'react'
+import { AppShell } from './components/AppShell'
+import { PageHeader } from './components/PageHeader'
+import { StatusBadge } from './components/StatusBadge'
 import { brand } from './data/brand'
 import { useAgentWorkspace } from './hooks/useAgentWorkspace'
+import { getMasterAgentSnapshot, orchestrate } from './services/automation/masterAgent'
+import type { MasterAgentSnapshot } from './types/automation'
 
 const modeLabel = {
   scout: 'Scout',
@@ -15,45 +20,66 @@ const modeLabel = {
 export default function App() {
   const { tasks, messages, prompt, setPrompt, busy, loading, submitPrompt } =
     useAgentWorkspace()
+  const [master, setMaster] = useState<MasterAgentSnapshot | null>(null)
+  const [routeNotice, setRouteNotice] = useState<string | null>(null)
+
+  useEffect(() => {
+    void getMasterAgentSnapshot().then(setMaster)
+  }, [])
+
+  async function onOrchestrate() {
+    const text = prompt.trim()
+    if (!text) return
+    await submitPrompt()
+    const result = await orchestrate(text)
+    setRouteNotice(result)
+  }
 
   return (
-    <div className="agent-shell">
-      <SiteNav />
+    <AppShell title="Master Agent">
+      <PageHeader
+        eyebrow={brand.name}
+        title={brand.tagline}
+        description={brand.pitch}
+        actions={
+          <Link className="btn btn--ghost" to="/recruitment">
+            Open pipeline
+          </Link>
+        }
+      />
 
-      <section className="agent-hero">
-        <div className="agent-hero__veil" aria-hidden="true" />
-        <motion.div
-          className="agent-hero__copy"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="brand-mark">{brand.name}</p>
-          <h1>{brand.tagline}</h1>
-          <p className="lede">{brand.pitch}</p>
-          <div className="cta-row">
-            <a className="btn btn--primary" href="#workspace">
-              Open workspace
-            </a>
-            <Link className="btn btn--ghost" to="/recruitment">
-              Recruitment intel
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
+      {master ? (
+        <section className="agent-grid">
+          {master.agents.map((agent, index) => (
+            <motion.article
+              key={agent.id}
+              className="glass-panel agent-tile"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.04, duration: 0.35 }}
+            >
+              <div className="stack-item__top">
+                <strong>{agent.name}</strong>
+                <StatusBadge status={agent.status} />
+              </div>
+              <p>{agent.summary}</p>
+            </motion.article>
+          ))}
+        </section>
+      ) : null}
+
+      {routeNotice ? <p className="inline-notice">{routeNotice}</p> : null}
 
       <section id="workspace" className="agent-workspace">
         <motion.div
-          className="workspace-panel conversation"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.45 }}
+          className="workspace-panel glass-panel conversation"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
           <header className="panel-head">
             <Bot size={18} aria-hidden="true" />
-            <h2>Agent console</h2>
+            <h2>Master Agent console</h2>
           </header>
 
           <div className="message-list" role="log" aria-live="polite">
@@ -67,7 +93,7 @@ export default function App() {
                   key={message.id}
                   className={`message message--${message.role}`}
                 >
-                  <span>{message.role === 'agent' ? brand.name : 'You'}</span>
+                  <span>{message.role === 'agent' ? brand.shortName : 'You'}</span>
                   <p>{message.text}</p>
                   <time>{message.at}</time>
                 </article>
@@ -79,31 +105,35 @@ export default function App() {
             className="prompt-form"
             onSubmit={(event) => {
               event.preventDefault()
-              void submitPrompt()
+              void onOrchestrate()
             }}
           >
             <label className="sr-only" htmlFor="agent-prompt">
-              Instruct Meridian
+              Instruct TalentPilot
             </label>
             <input
               id="agent-prompt"
               value={prompt}
               onChange={(event) => setPrompt(event.target.value)}
-              placeholder="Ask Meridian to scout, screen, or clear ops…"
+              placeholder="Ask the Master Agent to scout, screen, schedule, or follow up…"
               disabled={busy}
             />
-            <button className="btn btn--primary" type="submit" disabled={busy || !prompt.trim()}>
-              {busy ? 'Working…' : 'Send'}
+            <button
+              className="btn btn--primary"
+              type="submit"
+              disabled={busy || !prompt.trim()}
+            >
+              <Sparkles size={15} />
+              {busy ? 'Working…' : 'Run'}
             </button>
           </form>
         </motion.div>
 
         <motion.aside
-          className="workspace-panel task-rail"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.45, delay: 0.08 }}
+          className="workspace-panel glass-panel task-rail"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.06 }}
         >
           <header className="panel-head">
             <h2>Overnight queue</h2>
@@ -122,6 +152,6 @@ export default function App() {
           </ul>
         </motion.aside>
       </section>
-    </div>
+    </AppShell>
   )
 }

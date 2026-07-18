@@ -18,7 +18,7 @@ export async function sendAgentPrompt(prompt: string): Promise<AgentMessage> {
   return {
     id: `m-${Date.now()}`,
     role: 'agent',
-    text: `Acknowledged: “${prompt.trim()}”. I’ve queued a scout + screen pass and will surface ranked candidates shortly.`,
+    text: `Acknowledged: “${prompt.trim()}”. Master Agent queued scout + screen and notified the automation agents.`,
     at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   }
 }

@@ -9,8 +9,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { AppShell } from '../../components/AppShell'
 import { CandidateCard } from '../../components/CandidateCard'
-import { SiteNav } from '../../components/SiteNav'
+import { PageHeader } from '../../components/PageHeader'
 import { SkillRadar } from '../../components/SkillRadar'
 import { useRecruitment } from '../../hooks/useRecruitment'
 import { formatPercent, titleCaseStatus } from '../../lib/format'
@@ -27,22 +28,12 @@ export function RecruitmentDashboard() {
   } = useRecruitment()
 
   return (
-    <div className="recruitment-shell">
-      <SiteNav />
-
-      <section className="recruitment-intro">
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-        >
-          <p className="eyebrow">Recruitment intelligence</p>
-          <h1>See who is ready, ranked, and next in line.</h1>
-          <p className="lede">
-            Live pipeline view powered by Meridian screening — mock service layer ready to swap for a backend.
-          </p>
-        </motion.div>
-      </section>
+    <AppShell title="Recruitment">
+      <PageHeader
+        eyebrow="Recruitment intelligence"
+        title="See who is ready, ranked, and next in line."
+        description="Live pipeline view powered by TalentPilot screening — mock service layer ready to swap for a backend."
+      />
 
       {loading && (
         <p className="state-line">
@@ -54,15 +45,15 @@ export function RecruitmentDashboard() {
       {snapshot && (
         <>
           <section className="metric-strip" aria-label="Recruitment metrics">
-            <div>
+            <div className="glass-panel">
               <span>Candidates</span>
               <strong>{snapshot.candidates.length}</strong>
             </div>
-            <div>
+            <div className="glass-panel">
               <span>Screened today</span>
               <strong>{snapshot.screenedToday}</strong>
             </div>
-            <div>
+            <div className="glass-panel">
               <span>Avg match</span>
               <strong>{formatPercent(snapshot.averageMatch)}</strong>
             </div>
@@ -87,7 +78,7 @@ export function RecruitmentDashboard() {
               {selected && (
                 <motion.article
                   key={selected.id}
-                  className="candidate-detail"
+                  className="candidate-detail glass-panel"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
@@ -130,27 +121,27 @@ export function RecruitmentDashboard() {
               )}
 
               <div className="charts-row">
-                <div className="chart-block">
+                <div className="chart-block glass-panel">
                   <h3>Stage volume</h3>
                   <ResponsiveContainer width="100%" height={220}>
                     <BarChart data={snapshot.pipeline}>
-                      <CartesianGrid stroke="rgba(11,61,58,0.1)" vertical={false} />
-                      <XAxis dataKey="stage" tick={{ fontSize: 12, fill: '#3d5a56' }} />
-                      <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#3d5a56' }} />
+                      <CartesianGrid stroke="rgba(15, 23, 42, 0.08)" vertical={false} />
+                      <XAxis dataKey="stage" tick={{ fontSize: 12, fill: '#64748b' }} />
+                      <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748b' }} />
                       <Tooltip />
-                      <Bar dataKey="count" fill="#0B3D3A" radius={[6, 6, 0, 0]} />
+                      <Bar dataKey="count" fill="#0f766e" radius={[8, 8, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="chart-block">
+                <div className="chart-block glass-panel">
                   <h3>Role demand</h3>
                   <ResponsiveContainer width="100%" height={220}>
                     <BarChart data={snapshot.roleDemand}>
-                      <CartesianGrid stroke="rgba(11,61,58,0.1)" vertical={false} />
-                      <XAxis dataKey="role" tick={{ fontSize: 11, fill: '#3d5a56' }} />
-                      <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#3d5a56' }} />
+                      <CartesianGrid stroke="rgba(15, 23, 42, 0.08)" vertical={false} />
+                      <XAxis dataKey="role" tick={{ fontSize: 11, fill: '#64748b' }} />
+                      <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748b' }} />
                       <Tooltip />
-                      <Bar dataKey="applicants" fill="#C4A35A" radius={[6, 6, 0, 0]} />
+                      <Bar dataKey="applicants" fill="#0ea5a4" radius={[8, 8, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -159,6 +150,6 @@ export function RecruitmentDashboard() {
           </section>
         </>
       )}
-    </div>
+    </AppShell>
   )
 }

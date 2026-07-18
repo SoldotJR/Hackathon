@@ -1,56 +1,20 @@
-.recruitment-shell {
-  min-height: 100vh;
-  padding-bottom: 3rem;
-}
-
-.recruitment-intro {
-  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem) 1rem;
-  max-width: 42rem;
-}
-
-.recruitment-intro .eyebrow {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--teal-bright);
-  margin-bottom: 0.65rem;
-}
-
-.recruitment-intro h1 {
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
-  line-height: 1.05;
-  margin-bottom: 0.75rem;
-}
-
-.recruitment-intro .lede {
-  color: var(--ink-soft);
-}
-
 .state-line {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  margin: 0 clamp(1.25rem, 4vw, 3rem);
+  margin: 0 0 1rem;
   color: var(--ink-soft);
 }
 
 .state-line--error {
-  color: #9b2c2c;
+  color: #b91c1c;
 }
 
 .metric-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
-  margin: 1.25rem clamp(1.25rem, 4vw, 3rem);
-}
-
-.metric-strip > div {
-  padding: 1rem 1.1rem;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.15rem;
 }
 
 .metric-strip span {
@@ -69,8 +33,7 @@
 .recruitment-grid {
   display: grid;
   grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.4fr);
-  gap: 1.25rem;
-  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  gap: 1rem;
 }
 
 .candidate-column h2,
@@ -91,7 +54,9 @@
   text-align: left;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.78);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
   padding: 0.9rem 1rem;
   cursor: pointer;
   transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
@@ -99,12 +64,12 @@
 
 .candidate-card:hover {
   transform: translateY(-1px);
-  border-color: rgba(11, 61, 58, 0.35);
+  border-color: rgba(15, 118, 110, 0.35);
 }
 
 .candidate-card.is-active {
   border-color: var(--teal);
-  background: rgba(11, 61, 58, 0.06);
+  background: rgba(15, 118, 110, 0.08);
 }
 
 .candidate-card__top {
@@ -135,27 +100,18 @@
 }
 
 .match-pill--high {
-  background: rgba(20, 112, 106, 0.14);
+  background: rgba(15, 118, 110, 0.14);
   color: var(--teal);
 }
 
 .match-pill--mid {
-  background: rgba(196, 163, 90, 0.22);
-  color: #7a5a12;
+  background: rgba(245, 158, 11, 0.16);
+  color: #92400e;
 }
 
 .match-pill--low {
-  background: rgba(120, 120, 120, 0.14);
-  color: #555;
-}
-
-.candidate-detail,
-.chart-block {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: var(--shadow);
-  padding: 1.15rem;
+  background: rgba(100, 116, 139, 0.14);
+  color: #475569;
 }
 
 .candidate-detail {
@@ -190,7 +146,8 @@
 .detail-facts div {
   padding: 0.7rem 0.8rem;
   border-radius: 12px;
-  background: var(--paper-deep);
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid var(--line);
 }
 
 .detail-facts dt {
@@ -206,7 +163,7 @@
 
 .skill-radar {
   border-radius: 14px;
-  background: linear-gradient(180deg, #f8fbfa, #eef5f2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(238, 242, 247, 0.9));
   border: 1px solid var(--line);
   padding: 0.5rem;
 }
