@@ -5,6 +5,8 @@
 ## Run locally
 
 ```bash
+git clone https://github.com/SoldotJR/Hackathon.git
+cd Hackathon
 npm install
 npm run dev
 ```

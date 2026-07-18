@@ -1,0 +1,231 @@
+.recruitment-shell {
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.recruitment-intro {
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem) 1rem;
+  max-width: 42rem;
+}
+
+.recruitment-intro .eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-bright);
+  margin-bottom: 0.65rem;
+}
+
+.recruitment-intro h1 {
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.recruitment-intro .lede {
+  color: var(--ink-soft);
+}
+
+.state-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 clamp(1.25rem, 4vw, 3rem);
+  color: var(--ink-soft);
+}
+
+.state-line--error {
+  color: #9b2c2c;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1.25rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.metric-strip > div {
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.metric-strip span {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.metric-strip strong {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+}
+
+.recruitment-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.4fr);
+  gap: 1.25rem;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.candidate-column h2,
+.detail-column h2,
+.chart-block h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.85rem;
+}
+
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.candidate-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.candidate-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(11, 61, 58, 0.35);
+}
+
+.candidate-card.is-active {
+  border-color: var(--teal);
+  background: rgba(11, 61, 58, 0.06);
+}
+
+.candidate-card__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.candidate-card p {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.candidate-card__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.match-pill {
+  font-size: 0.75rem;
+  font-weight: 750;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.match-pill--high {
+  background: rgba(20, 112, 106, 0.14);
+  color: var(--teal);
+}
+
+.match-pill--mid {
+  background: rgba(196, 163, 90, 0.22);
+  color: #7a5a12;
+}
+
+.match-pill--low {
+  background: rgba(120, 120, 120, 0.14);
+  color: #555;
+}
+
+.candidate-detail,
+.chart-block {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow);
+  padding: 1.15rem;
+}
+
+.candidate-detail {
+  margin-bottom: 1rem;
+}
+
+.candidate-detail header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.85rem;
+}
+
+.candidate-detail header p {
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+.candidate-detail .summary {
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.detail-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.detail-facts div {
+  padding: 0.7rem 0.8rem;
+  border-radius: 12px;
+  background: var(--paper-deep);
+}
+
+.detail-facts dt {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.2rem;
+}
+
+.detail-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.skill-radar {
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f8fbfa, #eef5f2);
+  border: 1px solid var(--line);
+  padding: 0.5rem;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 980px) {
+  .recruitment-grid,
+  .charts-row,
+  .metric-strip,
+  .detail-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-detail header {
+    flex-direction: column;
+  }
+}
