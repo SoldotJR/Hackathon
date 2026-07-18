@@ -23,6 +23,7 @@ import {
   simulateAgentWorkflow,
   uploadResume,
 } from "@/services/recruitment";
+import { notify } from "@/services/notifications";
 import { cn } from "@/utils/cn";
 
 const schema = z.object({
@@ -96,6 +97,11 @@ export function HiringRequestForm() {
         }
       }
       setFiles((prev) => [...prev, ...uploaded]);
+      if (uploaded.length) {
+        notify.resumeUploaded(
+          uploaded.length === 1 ? uploaded[0].name : `${uploaded.length} files`
+        );
+      }
     } finally {
       setUploading(false);
     }
@@ -167,6 +173,7 @@ export function HiringRequestForm() {
       if (res.success) {
         setPlan(res.data);
         setPhase("complete");
+        notify.workflowCompleted();
       } else {
         setError(res.message || "Failed to generate plan");
         setPhase("idle");

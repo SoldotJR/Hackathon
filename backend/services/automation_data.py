@@ -151,12 +151,47 @@ ACTIVITY = [
 NOTIFICATIONS = [
     {
         "id": "n1",
-        "title": "Email sent",
-        "message": "Acknowledgement email delivered to Emily Johnson",
+        "title": "Offer Letter Sent",
+        "message": "Offer letter successfully sent to Emily Johnson.",
         "type": "success",
+        "category": "emails",
         "read": False,
         "createdAt": "2026-07-18T09:21:00Z",
-    }
+        "candidateName": "Emily Johnson",
+        "href": "/dashboard/recruitment?tab=offer",
+        "actions": [
+            {"id": "view", "label": "View", "href": "/dashboard/recruitment?tab=offer"},
+            {"id": "dismiss", "label": "Dismiss"},
+        ],
+    },
+    {
+        "id": "n2",
+        "title": "Interview Reminder Scheduled",
+        "message": "Reminder will be sent tomorrow at 9:00 AM.",
+        "type": "info",
+        "category": "automation",
+        "read": False,
+        "createdAt": "2026-07-18T10:12:00Z",
+        "href": "/dashboard/automation?tab=reminders",
+        "actions": [
+            {"id": "view", "label": "View", "href": "/dashboard/automation?tab=reminders"},
+            {"id": "dismiss", "label": "Dismiss"},
+        ],
+    },
+    {
+        "id": "n3",
+        "title": "AI Completed Resume Screening",
+        "message": "126 resumes processed successfully.",
+        "type": "ai",
+        "category": "recruitment",
+        "read": False,
+        "createdAt": "2026-07-18T08:00:00Z",
+        "href": "/dashboard/candidates",
+        "actions": [
+            {"id": "view", "label": "View Results", "href": "/dashboard/candidates"},
+            {"id": "dismiss", "label": "Dismiss"},
+        ],
+    },
 ]
 
 PIPELINE = [

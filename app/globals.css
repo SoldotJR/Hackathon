@@ -233,3 +233,15 @@ body {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
+/* Sonner toast portal — glass stack */
+[data-sonner-toaster] {
+  --width: 380px;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+[data-sonner-toast] {
+  --normal-bg: transparent;
+  --normal-border: transparent;
+  --normal-text: var(--text);
+}

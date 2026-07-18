@@ -30,6 +30,7 @@ import { ExplainableAIPanel } from "@/features/recruitment/ExplainableAIPanel";
 import { AnalyticsDashboard } from "@/features/analytics/AnalyticsDashboard";
 import { getAnalytics } from "@/services/analytics";
 import { reportDownloadUrl } from "@/services/recruitment";
+import { notify } from "@/services/notifications";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function RecruitmentResults() {
@@ -67,7 +68,10 @@ export function RecruitmentResults() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => window.open(reportDownloadUrl("pdf"), "_blank")}
+            onClick={() => {
+              window.open(reportDownloadUrl("pdf"), "_blank");
+              notify.reportExported("PDF");
+            }}
           >
             <Download className="h-4 w-4" />
             PDF Report
@@ -75,7 +79,10 @@ export function RecruitmentResults() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => window.open(reportDownloadUrl("csv"), "_blank")}
+            onClick={() => {
+              window.open(reportDownloadUrl("csv"), "_blank");
+              notify.reportExported("CSV");
+            }}
           >
             <FileSpreadsheet className="h-4 w-4" />
             Export CSV

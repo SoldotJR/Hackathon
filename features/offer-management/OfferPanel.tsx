@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmailComposer } from "@/components/ui/email-composer";
 import { generateOffer, getOffers } from "@/services/automation";
+import { notify } from "@/services/notifications";
 import type { OfferLetter } from "@/types/automation";
 
 export function OfferPanel() {
@@ -48,6 +49,7 @@ export function OfferPanel() {
     const next = { ...selected, status: "Sent" as const };
     setSelected(next);
     setOffers((prev) => prev.map((o) => (o.id === next.id ? next : o)));
+    notify.offerSent(next.candidateName);
   };
 
   if (loading) return <Skeleton className="h-80 rounded-[24px]" />;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Syne } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { ToastProvider } from "@/components/notifications/ToastProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -31,7 +32,10 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${syne.variable} bg-background font-sans text-text antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <ToastProvider />
+        </ThemeProvider>
       </body>
     </html>
   );

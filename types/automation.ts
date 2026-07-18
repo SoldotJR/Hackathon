@@ -105,14 +105,12 @@ export interface ActivityEvent {
   status: "success" | "pending" | "error" | "scheduled";
 }
 
-export interface AppNotification {
-  id: string;
-  title: string;
-  message: string;
-  type: "success" | "error" | "info" | "warning";
-  read: boolean;
-  createdAt: string;
-}
+export type {
+  AppNotification,
+  NotificationAction,
+  NotificationCategory,
+  NotificationKind,
+} from "@/types/notifications";
 
 export interface AutomationStats {
   emailsSentToday: number;

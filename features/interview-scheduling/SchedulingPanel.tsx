@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { confirmSchedule, getSchedules } from "@/services/automation";
+import { notify } from "@/services/notifications";
 import type { ScheduleSuggestion } from "@/types/automation";
 
 export function SchedulingPanel() {
@@ -33,6 +34,8 @@ export function SchedulingPanel() {
       setSlots((prev) =>
         prev.map((s) => (s.id === id ? { ...s, confirmed: true } : s))
       );
+      notify.interviewScheduled(res.data.candidateName);
+      notify.reminderScheduled("tomorrow at 9:00 AM");
     }
   };
 

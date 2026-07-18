@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { SummaryCard } from "@/components/ui/summary-card";
 import { EmailComposer } from "@/components/ui/email-composer";
 import { SimpleTimeline } from "@/components/ui/simple-timeline";
+import { notify } from "@/services/notifications";
 import { cn } from "@/utils/cn";
 
 type StageStatus = "completed" | "waiting" | "active" | "locked";
@@ -218,6 +219,14 @@ export function CommunicationPanel() {
     await new Promise((r) => setTimeout(r, 700));
     fn();
     setBusy(null);
+    if (key === "invite") {
+      notify.interviewScheduled("Emily Johnson");
+      notify.reminderScheduled("tomorrow at 9:00 AM");
+    } else if (key === "reject") {
+      notify.candidateRejected("Emily Johnson");
+    } else if (key === "offer") {
+      notify.offerSent("Emily Johnson");
+    }
   };
 
   const toggle = (id: string) =>

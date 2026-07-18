@@ -33,6 +33,7 @@ import {
 } from "@/services/reports";
 import { getAnalytics } from "@/services/analytics";
 import { reportDownloadUrl } from "@/services/recruitment";
+import { notify } from "@/services/notifications";
 import type {
   HiringRecommendation,
   SalaryAnalysis,
@@ -101,6 +102,10 @@ export function ReportsAnalyticsHub() {
     await navigator.clipboard.writeText(summaryText);
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
+    notify.success("Summary copied", "Hiring summary copied to clipboard.", {
+      category: "system",
+      skipCenter: true,
+    });
   };
 
   const downloadCsv = () => {
@@ -116,6 +121,7 @@ export function ReportsAnalyticsHub() {
     a.download = "talentpilot-report.csv";
     a.click();
     URL.revokeObjectURL(url);
+    notify.reportExported("CSV");
   };
 
   const downloadExcelish = () => {
@@ -131,6 +137,7 @@ export function ReportsAnalyticsHub() {
     a.download = "talentpilot-report.xls";
     a.click();
     URL.revokeObjectURL(url);
+    notify.reportExported("Excel");
   };
 
   return (
@@ -243,7 +250,10 @@ export function ReportsAnalyticsHub() {
                 <div className="flex flex-wrap gap-2">
                   <Button
                     variant="outline"
-                    onClick={() => window.open(reportDownloadUrl("pdf"), "_blank")}
+                    onClick={() => {
+                      window.open(reportDownloadUrl("pdf"), "_blank");
+                      notify.reportExported("PDF");
+                    }}
                   >
                     <FileText className="h-4 w-4" />
                     Export PDF
@@ -308,6 +318,7 @@ export function ReportsAnalyticsHub() {
             <Button
               onClick={() => {
                 window.open(reportDownloadUrl("pdf"), "_blank");
+                notify.reportExported("PDF");
               }}
             >
               <Download className="h-4 w-4" />
