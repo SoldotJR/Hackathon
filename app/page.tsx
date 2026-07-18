@@ -1,102 +1,172 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Play,
+  Bot,
+  Sparkles,
+  Users,
+  Zap,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const NeuralNetworkScene = dynamic(
+  () =>
+    import("@/components/3d/NeuralNetwork").then((m) => m.NeuralNetworkScene),
+  { ssr: false, loading: () => <div className="absolute inset-0 bg-mesh" /> }
+);
+
+const workflowSteps = [
+  "Master Agent",
+  "Requirement",
+  "Matching",
+  "Ranking",
+  "Hiring Report",
+];
+
+export default function LandingPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="relative min-h-screen overflow-hidden bg-mesh">
+      <nav className="relative z-20 flex items-center justify-between px-6 py-5 lg:px-12">
+        <div className="flex items-center gap-2">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/20">
+            <Sparkles className="h-5 w-5 text-primary" />
+          </div>
+          <span className="font-[family-name:var(--font-syne)] text-lg font-semibold tracking-tight">
+            TalentPilot AI
+          </span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link href="/dashboard">
+          <Button variant="glass" size="sm">
+            Launch Dashboard
+          </Button>
+        </Link>
+      </nav>
+
+      {/* Hero — brand first, one composition */}
+      <section className="relative z-10 flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-6 pb-20 pt-8 text-center">
+        <div className="pointer-events-none absolute inset-0 opacity-80">
+          <NeuralNetworkScene />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="relative z-10 max-w-4xl"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <motion.h1
+            className="font-[family-name:var(--font-syne)] text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+          >
+            <span className="gradient-text">TalentPilot AI</span>
+          </motion.h1>
+
+          <motion.p
+            className="mx-auto mt-5 max-w-xl text-base text-subtext sm:text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            The Future of Autonomous Recruitment
+          </motion.p>
+
+          <motion.div
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+          >
+            <Link href="/dashboard/recruitment">
+              <Button size="lg" className="min-w-[200px]">
+                Launch Dashboard
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/dashboard/workflow">
+              <Button size="lg" variant="outline" className="min-w-[180px]">
+                <Play className="h-4 w-4" />
+                Watch Demo
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Workflow animation strip */}
+      <section className="relative z-10 border-t border-white/5 bg-background/60 px-6 py-16 backdrop-blur-sm lg:px-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-8 text-center text-sm text-subtext">
+            Recruitment workflow
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {workflowSteps.map((step, i) => (
+              <motion.div
+                key={step}
+                className="flex items-center gap-3"
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="glass flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm">
+                  <Bot className="h-4 w-4 text-primary" />
+                  {step}
+                </div>
+                {i < workflowSteps.length - 1 && (
+                  <ArrowRight className="hidden h-4 w-4 text-subtext sm:block" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-3">
+            {[
+              {
+                icon: Zap,
+                title: "Agentic pipeline",
+                body: "Ten specialized agents collaborate from requirement parsing to final hire report.",
+              },
+              {
+                icon: Users,
+                title: "Ranked matches",
+                body: "Skill, salary, and culture signals fused into transparent candidate rankings.",
+              },
+              {
+                icon: Sparkles,
+                title: "Interview-ready",
+                body: "Questions, schedules, and salary analysis delivered in one dashboard.",
+              },
+            ].map((f, i) => (
+              <motion.div
+                key={f.title}
+                className="glass glass-hover rounded-[24px] p-6"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <f.icon className="mb-4 h-6 w-6 text-secondary" />
+                <h3 className="font-[family-name:var(--font-syne)] text-lg font-semibold">
+                  {f.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-subtext">
+                  {f.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="relative z-10 border-t border-white/5 px-6 py-8 text-center text-sm text-subtext">
+        TalentPilot AI · Agentic HR Recruitment Manager
       </footer>
     </div>
   );

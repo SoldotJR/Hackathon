@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalentPilot AI
 
-## Getting Started
+**Agentic AI HR Recruitment Manager** — autonomous multi-agent hiring pipeline with a premium SaaS frontend.
 
-First, run the development server:
+> The Future of Autonomous Recruitment
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Architecture
+
+```
+talentpilot-ai/
+├── app/                 # Next.js 15 App Router (landing + dashboard)
+├── components/          # UI, layout, 3D scenes
+├── features/            # Domain modules (recruitment, candidates, workflow…)
+├── services/            # REST client → FastAPI (mock fallback if offline)
+├── store/               # Zustand
+├── types/               # Shared TypeScript contracts
+└── backend/             # FastAPI multi-agent system
+    ├── agents/          # Master + 9 specialist agents
+    ├── api/             # Thin route layer
+    ├── services/        # LLM, parsing, embeddings, reports
+    ├── schemas/         # Pydantic models
+    └── main.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Multi-agent pipeline
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+Master Agent
+ → Requirement Analysis
+ → Resume Parsing
+ → Candidate Matching
+ → Skill Gap
+ → Ranking
+ → Interview Questions
+ → Salary Compatibility
+ → Interview Scheduling
+ → Hiring Recommendation
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+| Layer | Tech |
+|-------|------|
+| Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion, React Flow, R3F, Recharts |
+| Backend | FastAPI, Pydantic |
+| AI | Google Gemini (primary), Groq (fallback), heuristic mode when no keys |
+| Parsing | PyMuPDF, pdfplumber |
+| Embeddings | TF-IDF / optional Sentence-Transformers |
+| Auth / DB | Supabase-ready (in-memory store works out of the box) |
 
-To learn more about Next.js, take a look at the following resources:
+## Quick start
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cd backend
+python -m venv .venv
 
-## Deploy on Vercel
+# Windows
+.venv\Scripts\activate
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# macOS / Linux
+source .venv/bin/activate
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+pip install -r requirements.txt
+copy .env.example .env   # or: cp .env.example .env
+# Add GEMINI_API_KEY (free): https://aistudio.google.com/apikey
+
+uvicorn main:app --reload --port 8000
+```
+
+API docs: http://localhost:8000/docs
+
+### 2. Frontend
+
+```bash
+# from repo root
+npm install
+copy .env.example .env.local   # NEXT_PUBLIC_API_URL=http://localhost:8000
+npm run dev
+```
+
+Open http://localhost:3000
+
+Without a running backend, the UI still works in **demo mode** (mock data).
+
+## API endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/recruit` | Run full agent pipeline |
+| POST | `/api/upload-resume` | Upload PDF resume |
+| GET | `/api/candidates` | Ranked candidates |
+| GET | `/api/workflow` | Agent workflow status |
+| GET | `/api/report?format=json\|pdf\|csv` | Recruitment report |
+| GET | `/api/analytics` | Chart data |
+| GET | `/api/stats` | Dashboard stats |
+| GET | `/api/health` | Health + LLM provider |
+
+## Demo flow
+
+1. Landing → **Launch Dashboard**
+2. **Recruitment** → paste hiring request (or use sample) → optional resume upload / voice
+3. Watch the agent graph animate
+4. Explore ranking, skill radar, interviews, salary, schedule, recommendations
+5. Export **PDF** or **CSV**
+
+## Environment
+
+**Backend** (`backend/.env`)
+
+```
+GEMINI_API_KEY=
+GROQ_API_KEY=
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+DATABASE_URL=
+CORS_ORIGINS=http://localhost:3000
+```
+
+**Frontend** (`.env.local`)
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+## Deploy
+
+- Frontend → Vercel
+- Backend → Railway / Render
+
+## License
+
+MIT — built for hackathon excellence.
